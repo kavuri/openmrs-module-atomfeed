@@ -15,17 +15,44 @@ package org.openmrs.module.atomfeed.api;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.util.Date;
+
+import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openmrs.api.context.Context;
 import org.openmrs.test.BaseModuleContextSensitiveTest;
+import org.openmrs.test.Verifies;
+import org.openmrs.module.atomfeed.DataPoint;
 
 /**
  * Tests {@link AtomFeedService}.
  */
 public class AtomFeedServiceTest extends BaseModuleContextSensitiveTest {
 	
+    private AtomFeedService service;
+
 	@Test
 	public void shouldSetupContext() {
 		assertNotNull(Context.getService(AtomFeedService.class));
 	}
+	
+    @Before
+    public void before() throws Exception {
+        service = Context.getService(AtomFeedService.class);
+    }
+
+    @Test
+    @Verifies(value="should save the specified data point to the database", method="saveDataPoint(DataPoint)")
+    public void saveDataPoint_shouldSaveTheSpecifiedDataPointToDatabase() throws Exception {
+        int originalCount = service.getDataPoints(null).size();
+        DataPoint dp = new DataPoint();
+        dp.setAction("CREATED");
+        dp.setObjectClass("Concept");
+        dp.setDateCreated(new Date());
+        dp.setUuid("9fb658a6-bff8-4ab6-a7c5-a2242c470597");
+        DataPoint ret = service.saveDataPoint(dp);
+        Assert.assertNotNull(ret);
+        Assert.assertEquals(originalCount + 1, service.getDataPoints(null).size());
+    }
 }

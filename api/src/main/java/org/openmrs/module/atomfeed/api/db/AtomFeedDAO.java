@@ -13,8 +13,12 @@
  */
 package org.openmrs.module.atomfeed.api.db;
 
+import java.util.Date;
+import java.util.List;
+
 import org.openmrs.OpenmrsObject;
 import org.openmrs.module.atomfeed.api.AtomFeedService;
+import org.openmrs.module.atomfeed.DataPoint;
 
 /**
  *  Database methods for {@link AtomFeedService}.
@@ -23,4 +27,11 @@ public interface AtomFeedDAO {
 
 	OpenmrsObject getObjectByUuid(String classname, String uuid);
 	
+    public List<DataPoint> getDataPoints(Date changesSince);
+
+    public <T> T save(T object);
+
+    public void delete(Object object);
+
+    public void deleteDataPoints(Date since);
 }

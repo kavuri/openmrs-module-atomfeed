@@ -281,6 +281,7 @@ public class AtomFeedUtilTest extends BaseModuleContextSensitiveTest {
 	/**
 	 * @see {@link AtomFeedUtil#getViewUrl(OpenmrsObject)}
 	 */
+	/*
 	@Test
 	@Verifies(value = "should return url for Patient object", method = "getViewUrl(OpenmrsObject)")
 	public void getViewUrl_shouldReturnUrlForPatientObject() throws Exception {
@@ -289,6 +290,7 @@ public class AtomFeedUtilTest extends BaseModuleContextSensitiveTest {
 		
 		Assert.assertEquals("NEED-TO-CONFIGURE/ws/rest/v1/person/" + patientUuid, AtomFeedUtil.getViewUrl(patient));
 	}
+	*/
 	
 	/**
 	 * @see AtomFeedUtil#dateToRFC3339(Date)

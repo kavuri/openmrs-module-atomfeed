@@ -21,6 +21,9 @@
 		<property name="subscription"><bean class="org.openmrs.module.atomfeed.GeneralEventListener"></bean></property>
 	</bean>
 
+	<bean id="atomFeedDAO" class="${project.parent.groupId}.${project.parent.artifactId}.api.db.hibernate.HibernateAtomFeedDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 	<!-- Services accessible via Context.getService() -->
 	<bean parent="serviceContext">

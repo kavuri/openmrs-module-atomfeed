@@ -16,7 +16,7 @@ package org.openmrs.module.atomfeed;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.openmrs.BaseOpenmrsObject;
+import org.openmrs.BaseOpenmrsData;
 
 /**
  * This represents a single entry in the atom changes feed.
@@ -24,7 +24,7 @@ import org.openmrs.BaseOpenmrsObject;
  * This is an alternative implementation to just storing all changes in an
  * ever-growing file
  */
-public class DataPoint extends BaseOpenmrsObject implements Serializable {
+public class DataPoint extends BaseOpenmrsData implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,8 +33,8 @@ public class DataPoint extends BaseOpenmrsObject implements Serializable {
 	private Integer creator; // intentionally not a User object so that there
 								// are no dependencies
 	private Date dateCreated;
-	private String atomFeedContent;
 	private String objectClass;
+	private String action;
 
 	@Override
 	public Integer getId() {
@@ -54,6 +54,7 @@ public class DataPoint extends BaseOpenmrsObject implements Serializable {
 		this.uuid = uuid;
 	}
 
+	/*
 	public Integer getCreator() {
 		return creator;
 	}
@@ -61,6 +62,7 @@ public class DataPoint extends BaseOpenmrsObject implements Serializable {
 	public void setCreator(Integer creator) {
 		this.creator = creator;
 	}
+	*/
 
 	public Date getDateCreated() {
 		return dateCreated;
@@ -68,14 +70,6 @@ public class DataPoint extends BaseOpenmrsObject implements Serializable {
 
 	public void setDateCreated(Date dateCreated) {
 		this.dateCreated = dateCreated;
-	}
-
-	public String getAtomFeedContent() {
-		return atomFeedContent;
-	}
-
-	public void setAtomFeedContent(String atomFeedContent) {
-		this.atomFeedContent = atomFeedContent;
 	}
 
 	public String getObjectClass() {
@@ -86,4 +80,11 @@ public class DataPoint extends BaseOpenmrsObject implements Serializable {
 		this.objectClass = objectClass;
 	}
 
+	public String getAction() {
+	    return action;
+	}
+
+	public void setAction(String action) {
+	    this.action = action;
+	}
 }

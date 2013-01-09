@@ -13,8 +13,12 @@
  */
 package org.openmrs.module.atomfeed.api;
 
+import java.util.Date;
+import java.util.List;
+
 import org.openmrs.OpenmrsObject;
 import org.openmrs.api.OpenmrsService;
+import org.openmrs.module.atomfeed.DataPoint;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -27,4 +31,10 @@ public interface AtomFeedService extends OpenmrsService {
 
 	@Transactional(readOnly = true)
 	public OpenmrsObject getObjectByUuid(String classname, String uuid);
+
+    public DataPoint saveDataPoint(DataPoint dp);
+
+    public List<DataPoint> getDataPoints(Date changesSince);
+
+    public void deleteDataPoints(Date since);
 }

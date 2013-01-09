@@ -4,9 +4,31 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
-    <!--
-        See http://www.liquibase.org/manual/home#available_database_refactorings
-        for a list of supported elements and attributes
-    -->
     
+	<changeSet id="20130106-1500" author="kavuri">
+        <preConditions onFail="MARK_RAN">
+        	<not><tableExists tableName="data_changes" /></not>
+        </preConditions>
+        <comment>
+        	Adding data_changes table
+        </comment>
+        <createTable tableName="data_changes">
+            <column name="id" autoIncrement="true" type="int">
+                <constraints nullable="false" primaryKey="true" />
+            </column>
+            <column name="uuid" type="varchar(38)">
+                <constraints nullable="false" unique="true" />
+            </column>
+            <column name="date" type="varchar(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="action" type="varchar(50)">
+                <constraints nullable="false" />
+            </column>
+            <column name="objectClass" type="varchar(80)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+        
 </databaseChangeLog>

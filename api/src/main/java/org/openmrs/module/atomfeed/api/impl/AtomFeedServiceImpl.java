@@ -13,12 +13,16 @@
  */
 package org.openmrs.module.atomfeed.api.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.openmrs.OpenmrsObject;
 import org.openmrs.api.impl.BaseOpenmrsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.openmrs.module.atomfeed.api.AtomFeedService;
 import org.openmrs.module.atomfeed.api.db.AtomFeedDAO;
+import org.openmrs.module.atomfeed.DataPoint;
 
 /**
  * It is a default implementation of {@link AtomFeedService}.
@@ -47,4 +51,26 @@ public class AtomFeedServiceImpl extends BaseOpenmrsService implements AtomFeedS
 	public OpenmrsObject getObjectByUuid(String classname, String uuid) {
 		return dao.getObjectByUuid(classname, uuid);
 	}
+
+    /* (non-Javadoc)
+     * @see org.openmrs.module.changetracker.api.ChangeTrackerService#save(org.openmrs.module.changetracker.DataPoint)
+     */
+    public DataPoint saveDataPoint(DataPoint dp) {
+        return dao.save(dp);
+    }
+
+    /* (non-Javadoc)
+     * @see org.openmrs.module.changetracker.api.ChangeTrackerService#getDataPoints(java.util.Date)
+     */
+    public List<DataPoint> getDataPoints(Date changesSince) {
+        return dao.getDataPoints(changesSince);
+    }
+
+    /* (non-Javadoc)
+     * @see org.openmrs.module.changetracker.api.ChangeTrackerService#deleteDataPoints(java.util.Date)
+     */
+    public void deleteDataPoints(Date since) {
+        dao.deleteDataPoints(since);
+    }
+
 }

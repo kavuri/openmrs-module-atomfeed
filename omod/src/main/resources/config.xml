@@ -34,7 +34,7 @@
 	<!-- Required Modules -->
 	<require_modules>
 																											
-		<require_module version="1.0">
+		<require_module version="2.0">
 			org.openmrs.event
 		</require_module>
 		
@@ -60,7 +60,7 @@
 	
 	<!-- Maps hibernate file's, if present -->
 	<mappingFiles>
-				
+		DataPoint.hbm.xml
 	</mappingFiles>
 	
 	<servlet>

@@ -14,6 +14,7 @@
 package org.openmrs.module.atomfeed;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.jms.JMSException;
@@ -66,22 +67,29 @@ public class GeneralEventListener implements SubscribableEventListener {
 		
 		log.error("action: " + action + " object : " + classname + " uuid: " + uuid);
 		
-		OpenmrsObject openmrsObject = Context.getService(AtomFeedService.class).getObjectByUuid(classname, uuid);
+		AtomFeedService atomFeedService = Context.getService(AtomFeedService.class);
+		DataPoint dp = new DataPoint();
 		
 		/*
 		 * intentionally separating the methods here so that AtomFeedUtil
 		 * doesn't have a dependency on Event.Action
 		 */
 		if (action.equals(Event.Action.CREATED.name())) {
-			AtomFeedUtil.objectCreated(openmrsObject);
+		    dp.setAction("CREATED");
 		} else if (action.equals(Event.Action.UPDATED.name())) {
-			AtomFeedUtil.objectUpdated(openmrsObject);
+		    dp.setAction("UPDATED");
 		} else if (action.equals(Event.Action.VOIDED.name())) {
-			AtomFeedUtil.objectVoided(openmrsObject);
+		    dp.setAction("VOIDED");
 		} else if (action.equals(Event.Action.PURGED.name())) {
-			AtomFeedUtil.objectDeleted(openmrsObject);
+		    dp.setAction("PURGED");
 		}
 		
+		dp.setObjectClass(classname);
+        dp.setDateCreated(new Date());
+        dp.setUuid(uuid);
+
+		atomFeedService.saveDataPoint(dp);
+
 		Context.closeSession();
 	}
 	
